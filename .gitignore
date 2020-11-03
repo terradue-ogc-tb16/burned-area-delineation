@@ -1,0 +1,9 @@
+*.tif
+*.vrt
+*.geojson
+.ipynb_checkpoints
+__pycache__
+stac-results
+S2_BURNED_AREA_*
+catalog.json
+BURNED_AREA_DELINEATION*
