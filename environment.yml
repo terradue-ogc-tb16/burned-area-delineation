@@ -1,10 +1,10 @@
-name: env_burned_area
+name: env_burned_area_delineation
 channels:
   - terradue
   - conda-forge
 dependencies:
-  - pystac=0.3.3 
-  - gdal>2.2.2 
+  - pystac
+  - gdal>3.0.0
   - ipykernel 
   - numpy
   - python=3.7
