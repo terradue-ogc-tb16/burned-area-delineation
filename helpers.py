@@ -84,7 +84,10 @@ def cog(input_tif, output_tif,no_data=None):
     os.remove('{}.ovr'.format(input_tif))
     os.remove(input_tif)
     
-def get_gdal_asset_path(url, username=None, password=None):
+def get_gdal_asset_path(url):
+    
+    username = os.environ.get('STAGEIN_USERNAME')
+    password = os.environ.get('STAGEIN_PASSWORD')
     
     parsed = urlparse(url)
     
