@@ -2,6 +2,7 @@ from pystac import *
 import gdal 
 import os
 import numpy as np
+from urllib.parse import urlparse
 
 gdal.UseExceptions()
 
@@ -82,3 +83,36 @@ def cog(input_tif, output_tif,no_data=None):
     
     os.remove('{}.ovr'.format(input_tif))
     os.remove(input_tif)
+    
+def get_gdal_asset_path(url, username=None, password=None):
+    
+    parsed = urlparse(url)
+    
+    if parsed.scheme.startswith('http'):
+        
+        return get_vsi_url(url, username, password)
+    
+    else:
+    
+        return url
+    
+def get_vsi_url(url, username=None, password=None):
+    
+    
+    parsed_url = urlparse(url)
+
+    if username is not None:
+        
+        url = '/vsicurl/{}://{}:{}@{}/{}'.format(list(parsed_url)[0],
+                                                username, 
+                                                password, 
+                                                list(parsed_url)[1],
+                                                list(parsed_url)[2])
+    
+    else:
+        
+        url = '/vsicurl/{}://{}/{}'.format(list(parsed_url)[0],
+                                              list(parsed_url)[1],
+                                              list(parsed_url)[2])
+    
+    return url
